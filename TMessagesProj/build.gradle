@@ -35,9 +35,11 @@ android {
         release {
             storeFile file("config/release.keystore")
             storePassword RELEASE_STORE_PASSWORD
+            storePassword RELEASE_STORE_PASSWORD
             keyAlias RELEASE_KEY_ALIAS
             keyPassword RELEASE_KEY_PASSWORD
         }
+
     }
 
     buildTypes {
@@ -69,6 +71,7 @@ android {
         debug {
             manifest.srcFile 'config/debug/AndroidManifest.xml'
         }
+
         release {
             manifest.srcFile 'config/release/AndroidManifest.xml'
         }
@@ -80,7 +83,7 @@ android {
     defaultConfig {
         minSdkVersion 8
         targetSdkVersion 19
-        versionCode 330
-        versionName "1.9.0"
+        versionCode 331
+        versionName "1.9.1"
     }
 }

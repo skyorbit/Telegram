@@ -18,7 +18,7 @@
 
 package jawnae.pyronet;
 
-import org.telegram.messenger.ByteBufferDesc;
+import org.telegramkr.messenger.ByteBufferDesc;
 
 import java.io.EOFException;
 import java.io.IOException;
