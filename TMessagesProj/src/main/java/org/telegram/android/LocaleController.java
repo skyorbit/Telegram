@@ -704,11 +704,11 @@ public class LocaleController {
             chatDate = FastDateFormat.getInstance("d 'de' MMMM", locale);
             chatFullDate = FastDateFormat.getInstance("d 'de' MMMM 'de' yyyy", locale);
         } else if (lang.startsWith("ko")){
-            formatterMonth = FastDateFormat.getInstance("MMM dd", locale);
+            formatterMonth = FastDateFormat.getInstance("MMM월 dd일", locale);
             formatterYear = FastDateFormat.getInstance("yy.MM.dd", locale);
             formatterYearMax = FastDateFormat.getInstance("yyyy.MM.dd", locale);
             chatDate = FastDateFormat.getInstance("yyyy년 MM월 dd일 E", locale);
-            chatFullDate = FastDateFormat.getInstance(" yyyy MMMM dd", locale);
+            chatFullDate = FastDateFormat.getInstance(" yyyy년 M월 d일 EEEE", locale);
         }else {
             formatterMonth = FastDateFormat.getInstance("dd MMM", locale);
             formatterYear = FastDateFormat.getInstance("dd.MM.yy", locale);
