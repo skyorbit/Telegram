@@ -549,6 +549,10 @@ public class LocaleController {
         return getString("LanguageName", R.string.LanguageName);
     }
 
+    public static String getCurrentLanguageCode() {
+        return getString("LanguageCode", R.string.LanguageCode);
+    }
+
     public static String getString(String key, int res) {
         String value = getInstance().localeValues.get(key);
         if (value == null) {
@@ -666,6 +670,14 @@ public class LocaleController {
         } else if (dateDay + 1 == day && year == dateYear) {
             return String.format("%s %s %s", LocaleController.getString("LastSeen", R.string.LastSeen), LocaleController.getString("YesterdayAt", R.string.YesterdayAt), formatterDay.format(new Date(date * 1000)));
         } else if (year == dateYear) {
+            Locale locale = Locale.getDefault();
+            String lang = locale.getLanguage();
+            if (lang == null) {
+                lang = "en";
+            }
+            if(lang.equals("ko")){
+                return String.format("%s %s일 %s %s", LocaleController.getString("LastSeenDate", R.string.LastSeenDate), formatterMonth.format(new Date(date * 1000)), LocaleController.getString("OtherAt", R.string.OtherAt), formatterDay.format(new Date(date * 1000)));
+            }
             return String.format("%s %s %s %s", LocaleController.getString("LastSeenDate", R.string.LastSeenDate), formatterMonth.format(new Date(date * 1000)), LocaleController.getString("OtherAt", R.string.OtherAt), formatterDay.format(new Date(date * 1000)));
         } else {
             return String.format("%s %s %s %s", LocaleController.getString("LastSeenDate", R.string.LastSeenDate), formatterYear.format(new Date(date * 1000)), LocaleController.getString("OtherAt", R.string.OtherAt), formatterDay.format(new Date(date * 1000)));
@@ -691,7 +703,13 @@ public class LocaleController {
             formatterYearMax = FastDateFormat.getInstance("dd.MM.yyyy", locale);
             chatDate = FastDateFormat.getInstance("d 'de' MMMM", locale);
             chatFullDate = FastDateFormat.getInstance("d 'de' MMMM 'de' yyyy", locale);
-        } else {
+        } else if (lang.startsWith("ko")){
+            formatterMonth = FastDateFormat.getInstance("MMM dd", locale);
+            formatterYear = FastDateFormat.getInstance("yy.MM.dd", locale);
+            formatterYearMax = FastDateFormat.getInstance("yyyy.MM.dd", locale);
+            chatDate = FastDateFormat.getInstance("yyyy년 MM월 dd일 E", locale);
+            chatFullDate = FastDateFormat.getInstance(" yyyy MMMM dd", locale);
+        }else {
             formatterMonth = FastDateFormat.getInstance("dd MMM", locale);
             formatterYear = FastDateFormat.getInstance("dd.MM.yy", locale);
             formatterYearMax = FastDateFormat.getInstance("dd.MM.yyyy", locale);

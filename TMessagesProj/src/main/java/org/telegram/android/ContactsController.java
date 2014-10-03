@@ -37,6 +37,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.Locale;
 
 public class ContactsController {
     private Account currentAccount;
@@ -103,7 +104,16 @@ public class ContactsController {
 
     public ContactsController() {
         try {
-            nameDisplayOrder = Settings.System.getInt(ApplicationLoader.applicationContext.getContentResolver(), "android.contacts.DISPLAY_ORDER");
+            Locale locale = Locale.getDefault();
+            String lang = locale.getLanguage();
+            if (lang == null) {
+                lang = "en";
+            }
+            if(LocaleController.getCurrentLanguageCode().equals(lang)){
+                nameDisplayOrder = 0;
+            }else{
+                nameDisplayOrder = Settings.System.getInt(ApplicationLoader.applicationContext.getContentResolver(), "android.contacts.DISPLAY_ORDER");
+            }
         } catch (Exception e) {
             //don't promt
         }
